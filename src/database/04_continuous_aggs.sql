@@ -1,1 +1,16 @@
+-- 15-minute aggregations
+CREATE MATERIALIZED VIEW energy_readings_15min WITH (timescaledb.continuous) AS SELECT meter_id, time_bucket('15 minutes', timestamp) AS bucket, AVG(power) as avg_power, MAX(power) as max_power, SUM(energy) as total_energy 
+FROM energy_readings GROUP BY meter_id, bucket;
+
+-- Hourly aggregations
+CREATE MATERIALIZED VIEW energy_readings_hourly WITH (timescaledb.continuous) AS SELECT meter_id, time_bucket('1 hour', timestamp) AS bucket, AVG(power) as avg_power, MAX(power) as max_power, SUM(energy) as total_energy 
+FROM energy_readings GROUP BY meter_id, bucket;
+
+-- Daily aggregations
+CREATE MATERIALIZED VIEW energy_readings_daily WITH (timescaledb.continuous) AS SELECT meter_id, time_bucket('1 day', timestamp) AS bucket, AVG(power) as avg_power, MAX(power) as max_power, SUM(energy) as total_energy 
+FROM energy_readings GROUP BY meter_id, bucket;
+
+-- Applying Refresh Policy
+SELECT add_continuous_aggregate_policy('energy_readings_15min', 
+    start_offset => INTERVAL '3 days', end_offset => INTERVAL '1 hour', schedule_interval => INTERVAL '15 minutes');
 
