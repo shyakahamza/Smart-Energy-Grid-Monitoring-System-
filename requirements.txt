@@ -6,3 +6,4 @@ python-dotenv
 postgreSQL
 timescaleDB
 grafana
+emqx
