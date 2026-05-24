@@ -1,4 +1,4 @@
-# IoT Smart Grid Analytics Engine (TimescaleDB & Grafana)
+# Smart Grid Analytics Engine (TimescaleDB & Grafana)
 
 ## Setup & Installation
 1. **Database Setup**: Install TimescaleDB locally, connect to your PostgreSQL instance, and execute the SQL scripts found in `src/database/` in sequential order.
