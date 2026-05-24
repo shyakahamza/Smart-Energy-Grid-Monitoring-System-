@@ -1,1 +1,8 @@
 
+psycopg[binary]
+pandas
+numpy
+python-dotenv
+postgreSQL
+timescaleDB
+grafana
