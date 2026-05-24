@@ -6,6 +6,8 @@
    ```bash
    pip install -r requirements.txt
    python src/data_simulation/bulk_history_loader.py
+   python src/data_simulation/data_generator/py
+   python src/pipeline_subscriber.py
    ```
 3. **Dashboard Access**: Install Grafana natively on your OS. Access via `http://localhost:3000`, add your local PostgreSQL database as a data source, and import the JSON template from the `grafana/` directory.
 
