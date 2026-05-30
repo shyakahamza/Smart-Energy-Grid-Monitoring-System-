@@ -1,10 +1,4 @@
-
-psycopg
+psycopg[binary]
 pandas
 numpy
-python
-postgreSQL
-timescaleDB
-grafana
-emqx
-install paho
+paho-mqtt
