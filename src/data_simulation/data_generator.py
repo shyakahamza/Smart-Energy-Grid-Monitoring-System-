@@ -9,7 +9,7 @@ BROKER = 'localhost'
 PORT = 1883
 TOTAL_METERS = 1000
 
-# Step 2 requirement: Generate 1000 distinct 10-digit meter IDs
+# Generating 1000 different 10-digit meter IDs
 random.seed(101)
 METER_IDS = [str(random.randint(1000000000, 9999999999)) for _ in range(TOTAL_METERS)]
 
@@ -30,7 +30,7 @@ def run_test_generation():
     # Track historical accumulated energy per meter
     meter_energy_tracker = {m_id: 0.0 for m_id in METER_IDS}
 
-    # Step 2 requirement: Generate data for exactly 1 hour (12 cycles of 5-minute increments)
+    # Generating data for exactly 1 hour (12 cycles of 5-minute increments)
     start_time = datetime.now() - timedelta(hours=1)
     
     print("Starting 1-hour data generation test for 1,000 meters...")
@@ -48,7 +48,7 @@ def run_test_generation():
             # 5 minutes accumulation = power * (5 / 60) hours
             meter_energy_tracker[meter_id] += power * (5 / 60)
             
-            # Step 2 requirement: Message format must be JSON with required fields
+            # Ensuring Message format is JSON with required fields
             payload = {
                 "meter_id": meter_id,
                 "timestamp": timestamp_snapshot.strftime("%Y-%m-%d %H:%M:%S"),
@@ -59,13 +59,10 @@ def run_test_generation():
                 "energy": round(meter_energy_tracker[meter_id], 4)
             }
             
-            # Step 2 requirement: Publish to topic energy/meters/{meter_id}
+            # Publishing to topic energy/meters/{meter_id}
             topic = f"energy/meters/{meter_id}"
             client.publish(topic, json.dumps(payload), qos=0)
-            
-        # Give EMQX broker a tiny fraction of a second to breathe between 1,000-message bursts
         time.sleep(0.1)
-
     client.loop_stop()
     print("1-Hour test simulation finished publishing!")
 
