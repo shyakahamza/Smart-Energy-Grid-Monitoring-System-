@@ -2,11 +2,11 @@ import json
 import psycopg2
 from paho.mqtt import client as mqtt_client
 
-# Database configuration
+
 DB_CONFIG = {
-    "dbname": "postgres",       # Your database name
-    "user": "postgres",         # Your database user
-    "password": "postgres", # Your actual database password
+    "dbname": "postgres",       
+    "user": "postgres",         
+    "password": "postgres", 
     "host": "localhost",
     "port": 5432
 }
@@ -17,6 +17,7 @@ def insert_to_db(cursor, data):
     INSERT INTO energy_readings (meter_id, timestamp, power, voltage, current, frequency, energy)
     VALUES (%s, %s, %s, %s, %s, %s, %s);
     """
+    
     cursor.execute(query, (
         data['meter_id'], 
         data['timestamp'], 
@@ -31,7 +32,7 @@ def on_message(client, userdata, msg):
     conn = userdata['db_conn']
     cursor = conn.cursor()
     try:
-        # Step 2 requirement: Parse incoming JSON payload
+        # Parsing incoming JSON payload
         payload = json.loads(msg.payload.decode())
         
         insert_to_db(cursor, payload)
