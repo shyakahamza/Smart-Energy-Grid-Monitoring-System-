@@ -7,14 +7,10 @@
    pip install -r requirements.txt
    python src/pipeline_subscriber.py
    python src/data_simulation/data_generator/py
-   python src/data_simulation/bulk_history_loader.py
-   
+   python src/data_simulation/bulk_history_loader.py   
    
    ```
 3. **Dashboard Access**: Install Grafana natively on your OS. Access via `http://localhost:3000`, add your local PostgreSQL database as a data source, and import the JSON template from the `grafana/` directory.
 
 
-## Summary to getting started 
-1. Run the SQL scripts in `src/database/` sequentially on your TimescaleDB instance.
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run the generator: `python src/data_simulation/bulk_history_loader.py`
+After running pipeline_subscriber.py and data_generator.py, make sure emqx subscribes to the topic and is able to receive messsages.
