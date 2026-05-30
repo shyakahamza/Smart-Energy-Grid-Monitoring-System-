@@ -1,9 +1,10 @@
 
-psycopg[binary]
+psycopg
 pandas
 numpy
-python-dotenv
+python
 postgreSQL
 timescaleDB
 grafana
 emqx
+install paho
